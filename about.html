@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My Portfolio - About</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+<style>
+  /* Google Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap');
+
+  /* Reset and base */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: #f4f6f8;
+    color: #222;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  a:hover, a:focus {
+    color: #007BFF;
+    outline: none;
+  }
+
+  /* Header */
+  header {
+    background: linear-gradient(135deg, #007BFF 0%, #00d9ff 100%);
+    color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    user-select: none;
+    cursor: default;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  }
+  ul.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+  ul.nav-links li a {
+    font-weight: 500;
+    font-size: 1rem;
+    position: relative;
+    padding-bottom: 5px;
+  }
+  ul.nav-links li a:hover,
+  ul.nav-links li a.active {
+    color: #ffd700;
+  }
+  ul.nav-links li a.active::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: #ffd700;
+    bottom: 0;
+    left: 0;
+    border-radius: 2px;
+    animation: slide-in 0.3s forwards;
+  }
+
+  @keyframes slide-in {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  main {
+    flex-grow: 1;
+    padding: 2rem 1rem 3rem;
+  }
+  .about-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    padding: 2.5rem 3rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+  }
+
+  /* Profile & bio section */
+  .bio-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+  }
+  .profile-photo {
+    width: 210px;
+    height: 210px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+    cursor: pointer;
+    border: 6px solid #00d9ff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex-shrink: 0;
+  }
+  .profile-photo:hover,
+  .profile-photo:focus {
+    transform: scale(1.07);
+    box-shadow: 0 18px 36px rgba(0,217,255,0.7);
+    outline: none;
+  }
+  .bio-text {
+    max-width: 600px;
+    font-size: 1rem;
+    color: #333;
+  }
+  .bio-text h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 2.6rem;
+    margin-bottom: 0.6rem;
+    color: #007BFF;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  }
+  .bio-text p {
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+  .bio-text p strong {
+    color: #00b8ff;
+  }
+
+  /* Timeline */
+  .timeline {
+    margin-top: 2rem;
+    border-left: 4px solid #00d9ff;
+    padding-left: 1.5rem;
+  }
+  .timeline-item {
+    margin-bottom: 1.8rem;
+    position: relative;
+  }
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -11px;
+    top: 5px;
+    width: 18px;
+    height: 18px;
+    background: #007BFF;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00d9ffaa;
+  }
+  .timeline-item h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: #0056b3;
+  }
+  .timeline-item span {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  .timeline-item p {
+    color: #555;
+    margin-top: 0.25rem;
+    font-size: 0.95rem;
+  }
+
+  /* Footer */
+  footer {
+    background: #222;
+    color: #ddd;
+    padding: 1.5rem 0;
+    text-align: center;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.4);
+  }
+  footer p {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    text-shadow: 1px 1px 2px #000;
+  }
+  footer .social-icons {
+    margin-top: 0.3rem;
+  }
+  footer .social-icons a {
+    color: #ddd;
+    margin: 0 0.5rem;
+    font-size: 1.3rem;
+    transition: color 0.3s ease;
+  }
+  footer .social-icons a:hover,
+  footer .social-icons a:focus {
+    color: #00d9ff;
+    outline: none;
+  }
+
+  /* Modal */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right:0;
+    bottom:0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1100;
+    animation: fadeIn 0.4s ease forwards;
+  }
+  .modal-overlay.active {
+    display: flex;
+  }
+  .modal-content {
+    background: white;
+    max-width: 400px;
+    width: 90%;
+    border-radius: 15px;
+    padding: 2rem 2.5rem;
+    box-shadow: 0 15px 35px rgba(0,123,255,0.3);
+    position: relative;
+    animation: modalSlideDown 0.5s ease forwards;
+  }
+  .modal-content h3 {
+    margin-bottom: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    color: #007BFF;
+    text-align: center;
+  }
+  .modal-content p {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  .modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 1.8rem;
+    color: #007BFF;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .modal-close-btn:hover {
+    transform: rotate(90deg);
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  @keyframes modalSlideDown {
+    from { transform: translateY(-40px); opacity: 0;}
+    to { transform: translateY(0); opacity: 1;}
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    nav {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .bio-header {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .bio-text {
+      max-width: 100%;
+      text-align: center;
+    }
+    .bio-text h1 {
+      font-size: 2rem;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="container" role="banner">
+    <nav aria-label="Primary">
+      <div class="logo" tabindex="0">MyPortfolio</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active" aria-current="page">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <article class="about-container" aria-label="About me section">
+    <div class="bio-header">
+      <img src="port.jpg" alt="Photo of Jane Doe" class="profile-photo" id="aboutPhoto" tabindex="0" />
+      <div class="bio-text">
+        <h1>Madison S. Davis</h1>
+        <p>Front-end Developer & UI/UX Enthusiast</p>
+        <p><strong>Passionate about designing clean interfaces and writing performant code.</strong> Over 5 years experience working with HTML, CSS, JavaScript, and modern frontend frameworks.</p>
+        <p>Committed to continuous learning and collaboration to deliver exceptional user experiences.</p>
+      </div>
+    </div>
+    <section class="timeline" aria-label="Work and education timeline">
+      <div class="timeline-item">
+        <h3>Senior Front-end Developer</h3>
+        <span>2021 - Present, TechCorp Inc.</span>
+        <p>Leading the front-end team to build scalable web apps using React and TypeScript.</p>
+      </div>
+      <div class="timeline-item">
+        <h3>Front-end Developer</h3>
+        <span>2018 - 2021, Creative Solutions</span>
+        <p>Developed responsive websites and optimized UI performance for clients across industries.</p>
+      </div>
+      <div class="timeline-item">
+        <h3>Bachelor's Degree in Computer Science</h3>
+        <span>2014 - 2018, State University</span>
+        <p>Focused on web technologies, software engineering, and human-computer interaction.</p>
+      </div>
+    </section>
+  </article>
+</main>
+
+<footer>
+  <p>© 2024 Jane Doe - All rights reserved.</p>
+  <div class="social-icons" aria-label="Social Media Links">
+    <a href="#" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+    <a href="#" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+  </div>
+</footer>
+
+<!-- Modal for About Photo Details -->
+<div class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle" id="aboutModal">
+  <div class="modal-content">
+    <button class="modal-close-btn" aria-label="Close modal" id="aboutModalCloseBtn">&times;</button>
+    <h3 id="modalTitle">More About Jane Doe</h3>
+    <p>I believe in writing clean, maintainable code and crafting experiences that users love. Outside coding, I enjoy painting, hiking, and photography. Let’s create amazing things together!</p>
+  </div>
+</div>
+
+<script>
+  // Modal functionality for about photo details
+  const aboutPhoto = document.getElementById('aboutPhoto');
+  const aboutModal = document.getElementById('aboutModal');
+  const aboutModalCloseBtn = document.getElementById('aboutModalCloseBtn');
+
+  function openAboutModal() {
+    aboutModal.classList.add('active');
+    aboutModalCloseBtn.focus();
+    document.body.style.overflow = 'hidden';
+  }
+  function closeAboutModal() {
+    aboutModal.classList.remove('active');
+    aboutPhoto.focus();
+    document.body.style.overflow = '';
+  }
+
+  aboutPhoto.addEventListener('click', openAboutModal);
+  aboutPhoto.addEventListener('keydown', e => {
+    if(e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openAboutModal();
+    }
+  });
+  aboutModalCloseBtn.addEventListener('click', closeAboutModal);
+  aboutModal.addEventListener('click', e => {
+    if (e.target === aboutModal) {
+      closeAboutModal();
+    }
+  });
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape' && aboutModal.classList.contains('active')) {
+      closeAboutModal();
+    }
+  });
+</script>
+</body>
+</html>

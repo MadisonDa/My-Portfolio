@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My Portfolio - Home</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+<style>
+  /* Google Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap');
+
+  /* Reset and base */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: #f4f6f8;
+    color: #222;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  a:hover, a:focus {
+    color: #007BFF;
+    outline: none;
+  }
+
+  /* Header */
+  header {
+    background: linear-gradient(135deg, #007BFF 0%, #00d9ff 100%);
+    color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    user-select: none;
+    cursor: default;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  }
+  ul.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+  ul.nav-links li a {
+    font-weight: 500;
+    font-size: 1rem;
+    position: relative;
+    padding-bottom: 5px;
+  }
+  ul.nav-links li a:hover,
+  ul.nav-links li a.active {
+    color: #ffd700;
+  }
+  ul.nav-links li a.active::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: #ffd700;
+    bottom: 0;
+    left: 0;
+    border-radius: 2px;
+    animation: slide-in 0.3s forwards;
+  }
+
+  @keyframes slide-in {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  /* Main content */
+  main {
+    flex-grow: 1;
+    margin: 2rem 1rem 3rem;
+  }
+
+  /* Intro Section */
+  .intro {
+    max-width: 900px;
+    margin: 0 auto 3rem;
+    text-align: center;
+  }
+  .intro h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+    color: #007BFF;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  }
+  .intro p {
+    font-size: 1.2rem;
+    color: #555;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+  }
+  .profile-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: inline-block;
+    border: 5px solid #00d9ff;
+  }
+  .profile-photo:hover,
+  .profile-photo:focus {
+    transform: scale(1.05);
+    box-shadow: 0 15px 25px rgba(0,217,255,0.6);
+    outline: none;
+  }
+
+  /* Sections grid */
+  .sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+
+
+  /* Footer */
+  footer {
+    background: #222;
+    color: #ddd;
+    padding: 1.5rem 0;
+    text-align: center;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.4);
+  }
+  footer p {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    text-shadow: 1px 1px 2px #000;
+  }
+  footer .social-icons {
+    margin-top: 0.3rem;
+  }
+  footer .social-icons a {
+    color: #ddd;
+    margin: 0 0.5rem;
+    font-size: 1.3rem;
+    transition: color 0.3s ease;
+  }
+  footer .social-icons a:hover,
+  footer .social-icons a:focus {
+    color: #00d9ff;
+    outline: none;
+  }
+
+  /* Modal */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right:0;
+    bottom:0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1100;
+    animation: fadeIn 0.4s ease forwards;
+  }
+  .modal-overlay.active {
+    display: flex;
+  }
+  .modal-content {
+    background: white;
+    max-width: 400px;
+    width: 90%;
+    border-radius: 15px;
+    padding: 2rem 2.5rem;
+    box-shadow: 0 15px 35px rgba(0,123,255,0.3);
+    position: relative;
+    animation: modalSlideDown 0.5s ease forwards;
+  }
+  .modal-content h3 {
+    margin-bottom: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    color: #007BFF;
+    text-align: center;
+  }
+  .modal-content p {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  .modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 1.8rem;
+    color: #007BFF;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .modal-close-btn:hover {
+    transform: rotate(90deg);
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  @keyframes modalSlideDown {
+    from { transform: translateY(-40px); opacity: 0;}
+    to { transform: translateY(0); opacity: 1;}
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .intro h1 {
+      font-size: 2rem;
+    }
+    .sections {
+      grid-template-columns: 1fr;
+    }
+    nav {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+  }
+
+</style>
+</head>
+<body>
+<header>
+  <div class="container" role="banner">
+    <nav aria-label="Primary">
+      <div class="logo" tabindex="0">MyPortfolio</div>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="intro" aria-label="Introduction">
+    <img src="portfoliopic.jpg" alt="Photo of Me" class="profile-photo" id="profilePhoto" tabindex="0" />
+    <h1>Hi, I'm Madison S. Davis</h1>
+    <p>Creative front-end developer passionate about crafting beautiful, performant websites and applications. 
+        I attend the STARZ University and very passionate about ICT and Technology.
+    </p>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 Madison Davis - All rights reserved.</p>
+  <div class="social-icons" aria-label="Social Media Links">
+    <a href="#" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+    <a href="#" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+  </div>
+</footer>
+
+<!-- Modal for Photo Details -->
+<div class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle" id="photoModal">
+  <div class="modal-content">
+    <button class="modal-close-btn" aria-label="Close modal" id="modalCloseBtn">&times;</button>
+    <h3 id="modalTitle">About Madison S. Davis</h3>
+    <p>Hello! I'm Madison, a passionate front-end developer with 5 years of experience in crafting beautiful, responsive, and user-friendly digital experiences. I love turning ideas into reality through clean code and creative design.</p>
+  </div>
+</div>
+
+<script>
+  // Modal functionality for photo details
+  const profilePhoto = document.getElementById('profilePhoto');
+  const photoModal = document.getElementById('photoModal');
+  const modalCloseBtn = document.getElementById('modalCloseBtn');
+
+  function openModal() {
+    photoModal.classList.add('active');
+    modalCloseBtn.focus();
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    photoModal.classList.remove('active');
+    profilePhoto.focus();
+    document.body.style.overflow = '';
+  }
+
+  profilePhoto.addEventListener('click', openModal);
+  profilePhoto.addEventListener('keydown', e => {
+    if(e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openModal();
+    }
+  });
+  modalCloseBtn.addEventListener('click', closeModal);
+  photoModal.addEventListener('click', e => {
+    if (e.target === photoModal) {
+      closeModal();
+    }
+  });
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape' && photoModal.classList.contains('active')) {
+      closeModal();
+    }
+  });
+</script>
+</body>
+</html>
+
